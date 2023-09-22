@@ -16,6 +16,7 @@
 -	All members should be present when major decisions regarding the course of the project are being made in order to facilitate input
 -	The distribution of tasks should be discussed with all members and any final decision should be made with consensus, but all members should have a roughly equal amount of work done
 -	If there’s an issue with the quality of the work it should be addressed by reaching out to the relevant group members to discuss it
+-	Communciation can be from GroupMe, Text, Email, or any other medium the group deems fit
 
 ## Policies & Procedure
 -	There should be open communication on issues or minor violations arising within the group in order to avoid escalating the situation or to prevent major issues arising in the future
@@ -23,9 +24,18 @@
 
 ## Consequences
 -	**Severe violations** of the nature and principle of this agreement will be forwarded to Prof. Buzard for mediation and enforcement
+-	Dr.Buzard has the ability to enforce this contract in any way she deems necessary, **including grade deductions**
+-	Low level violations will be dicussed in group meetings prior to speaking with Dr.Buzard, **highlighted in the diagram below** 
 -	Group members who otherwise fail to uphold this agreement may be rated poorly for the group self-assessment at the end of the semester
--	Inaction on the part of one group member should not prevent other group members from standing up and completing the work in the meantime with the assumption that
-
+-	Inaction on the part of one group member should not prevent other group members from standing up and completing the work in the meantime
+```mermaid
+graph TD;
+    Violation--->GroupMeeting;
+    GroupMeeting-->2ndViolation;
+    2ndViolation-->Dr.Buzard;
+    
+    
+```
 ### Group Members:
 >Will,
 >Anna,
