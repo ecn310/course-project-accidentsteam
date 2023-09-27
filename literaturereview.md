@@ -57,9 +57,27 @@ This literature review aims to resolve some of these questions, and help the res
 - Cost to Firms 
 - Potentially, an increase in profit or wages long term., 
 
-##### Source III.
+### Source III.
+What affect dose labor unions have on workplace safety 
 
-##### Source IV.
+Labor unions are known to maintain safe workplaces and prevent hazards in worksite though collective voice and communication with management. Dose data on the amount of workplace accidents from union and non-union Workers support this idea? 
 
-##### Source V.
+ 
+
+Li, L., Rohlin, S., & Singleton, P. (2020). The Effect of Labor Unions on Workplace Safety: A National Study. Industrial Relations: A Journal of Economy and Society, 59(4), 643-670. 
+
+ 
+
+ 
+
+How I found this paper. I found it online in the reference's professor Singleton used in his paper 
+
+Big picture question: why dose the data show that there is no effect on unionization to accident case rates even though labor unions are known to make the workplace safer.  What are some factors that affect the Likely hood of a worker reporting a accident.
+
+Hypothesis – the people not in labor unions might not be educated on how to report an accident in the workplace. And it is easier to report something if a worker is in a union because the worker will have a bigger voice and support.  
+
+Theory - people in unions can report more accidents without backlash.   
+### Source IV.
+
+### Source V.
 
