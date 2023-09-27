@@ -76,8 +76,35 @@ Big picture question: why dose the data show that there is no effect on unioniza
 
 Hypothesis – the people not in labor unions might not be educated on how to report an accident in the workplace. And it is easier to report something if a worker is in a union because the worker will have a bigger voice and support.  
 
-Theory - people in unions can report more accidents without backlash.   
+Theory - people in unions can report more accidents without backlash. 
+
+
 ### Source IV.
+4. Charles, K. K., Johnson, M. S., Stephens Jr, M., & Lee, D. Q. (2019). Demand conditions and worker safety: Evidence from price shocks in mining (No. w26401). National Bureau of Economic Research.
+   
+**How I found this paper:**
+ - I found it in Professor Singleton’s cited resource.
+
+**Big Picture Question:**
+ - How do demand conditions of market affect various dimensions of workers’ safety?
+
+**Hypothesis:**
+ - Positive price shocks substantially increase workplace injury rates and safety regulation noncompliance. 
+
+**Theories that supported this hypothesis:**
+ - Labor market
+ - Price variations caused by exogenous demand shocks
+ - Opportunity cost effect
+
+**Specific Question:**
+ - The effect that demand conditions bring because of firm attributes or exogenous market forces is ambiguous. Two different literatures provide evidence for their opposite ideas. Whether the demand shocks improve or impair workers’ safety? How’s employers’ incentives regarding on safety when facing the demand shocks? 
+
+**Hypothesis:**
+ - Positive demand shocks impair workplace safety. And the results might be contradicted with existing research. Opportunity costs and financial constraints have meaningful impacts on the safety and health of workers.  
+
+**Theories that supported this hypothesis:**
+ - Demand and labor market
+
 
 ### Source V.
 
