@@ -107,7 +107,7 @@ Theory - people in unions can report more accidents without backlash.
 
 
 ### Source V.
-What effects do workplace inspections have on workplace safety?
+Li, L., & Singleton, P. (2019). The Effect of Workplace Inspections on Worker Safety. _ILR Review, 72_(3), 718–748. https://doi.org/10.1177/0019793918801575
 
 **How I found this paper:**
 - This paper was provided as a resource by Professor Singleton, who also contributed to the paper, and it appears to be related to our assignment.
