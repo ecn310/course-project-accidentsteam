@@ -107,4 +107,26 @@ Theory - people in unions can report more accidents without backlash.
 
 
 ### Source V.
+What effects do workplace inspections have on workplace safety?
 
+**How I found this paper:**
+- This paper was provided as a resource by Professor Singleton, who also contributed to the paper, and it appears to be related to our assignment.
+- 
+**Big Picture Question:**
+- How do workplace inspections impact the incidence rates of workplace injuries and accidents?
+
+**Hypothesis:**
+- Workplace inspections decrease the incidence rates of workplace injuries and accidents
+
+**Theories Supporting this Hypothesis:**
+- Punitive costs of violations vs costs/benefits of liability
+
+**Specific Question:**
+- Do site specific targeting (SST) plans impact workplace accidents, and do the benefits of this outweigh the marginal cost of implementing them
+
+**Hypothesis:**
+- SST plans do decrease the incidence of workplace accidents and their economic benefits outweigh the marginal costs of implementation
+
+**Theories Supporting this Hypothesis:**
+- Continuity of programmed inspections and DART rate
+- Modeling SST policy on pre-implementation datapoints
