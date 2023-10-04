@@ -8,7 +8,10 @@ This literature review aims to resolve some of these questions, and help the res
 1. Kniesner, T. J., & Leeth, J. D. (2014). Regulating occupational and product risks. In Handbook of the Economics of Risk and Uncertainty (Vol. 1, pp. 493-600). North-Holland.
 
 **How I found this paper:** 
--  I used Professor Singletons research and found this as one of his sources. This seemed applicable to our out review assignment. 
+-  I used Professor Singletons research and found this as one of his sources. This seemed applicable to our out review assignment.
+-  Which is cited below:
+
+i, L., Rohlin, S., & Singleton, P. (2022). Labor Unions and Workplace Safety. ILR Review, 75(2), 402-426. https://doi.org/10.1177/0019793920958417
 
 **Big Picture Question:**  
 - How do firms, households, and markets come together to determine the safety or health risk of a given workplace or good? 
@@ -54,8 +57,9 @@ This literature review aims to resolve some of these questions, and help the res
 - When there are random inspections of firms safety and health risks, there are less workplace accidents, which in turn allows for less injury related costs to firms, including lawsuits. 
 
 **Theories that supported this hypothesis:** 
-- Cost to Firms 
-- Potentially, an increase in profit or wages long term., 
+- Cost to Firms. 
+- Potentially, an increase in profit or wages long term.
+- Random inspections increase the probability that violations will be detected, and hence the benefit of violations is reduced; when the benefit of violations go up, there should be fewer violations.
 
 ### Source III.
 What affect dose labor unions have on workplace safety 
