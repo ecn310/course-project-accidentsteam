@@ -74,7 +74,7 @@ Li, L., Rohlin, S., & Singleton, P. (2020). The Effect of Labor Unions on Workpl
 
  
 
-How I found this paper. I found this in profesor Singletons paper.
+How I found this paper. I found it in the profesor singletons paper. it was in the sourses section. https://journals.sagepub.com/doi/10.1177/0019793920958417
 Big picture question: why dose the data show that there is no effect on unionization to accident case rates even though labor unions are known to make the workplace safer.  What are some factors that affect the Likely hood of a worker reporting a accident.
 
 Hypothesis – the people not in labor unions might not be educated on how to report an accident in the workplace. And it is easier to report something if a worker is in a union because the worker will have a bigger voice and support.  
