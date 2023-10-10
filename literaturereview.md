@@ -113,13 +113,14 @@ Theory - people in unions can report more accidents without backlash.
 Li, L., & Singleton, P. (2019). The Effect of Workplace Inspections on Worker Safety. _ILR Review, 72_(3), 718–748. https://doi.org/10.1177/0019793918801575
 
 **How I found this paper:**
-- This paper was provided as a resource by Professor Singleton, who also contributed to the paper, and it appears to be related to our assignment.
-- 
+- This paper was provided as a resource by Professor Singleton, who also contributed to the paper, and it appears to be related to our assignment. He published the paper through the ILR review at Li, L., & Singleton, P. (2019). The Effect of Workplace Inspections on Worker Safety. _ILR Review, 72_(3), 718–748. https://doi.org/10.1177/0019793918801575.
+  
 **Big Picture Question:**
 - How do workplace inspections impact the incidence rates of workplace injuries and accidents?
 
 **Hypothesis:**
-- Workplace inspections decrease the incidence rates of workplace injuries and accidents
+- Workplace inspections decrease the incidence rates of workplace injuries and accidents. This is distinct from the hypothesis in Source II insofar as that the mechanism included in the paper is inclusive of inspections carried out as a follow-up from reports and incidents, which more precisely targets accident-prone workplaces.
+
 
 **Theories Supporting this Hypothesis:**
 - Punitive costs of violations vs costs/benefits of liability
