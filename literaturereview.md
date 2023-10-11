@@ -86,27 +86,29 @@ Theory - people in unions can report more accidents without backlash.
 4. Charles, K. K., Johnson, M. S., Stephens Jr, M., & Lee, D. Q. (2019). Demand conditions and worker safety: Evidence from price shocks in mining (No. w26401). National Bureau of Economic Research.
    
 **How I found this paper:**
- - I found it in Professor Singleton’s cited resource.
+ - I found this article in the footnote of Professor Singleton’s "The effect of workplace inspections on worker safety". The link to the article is https://doi.org/10.1086/713887
 
 **Big Picture Question:**
  - How do demand conditions of market affect various dimensions of workers’ safety?
 
 **Hypothesis:**
- - Positive price shocks substantially increase workplace injury rates and safety regulation noncompliance. 
+ - "Positive price shocks substantially increase workplace injury rates and safety regulation noncompliance."(Charles, Abstract)
 
 **Theories that supported this hypothesis:**
- - Labor market
+ - Law of demand and supply
  - Price variations caused by exogenous demand shocks
  - Opportunity cost effect
 
 **Specific Question:**
- - The effect that demand conditions bring because of firm attributes or exogenous market forces is ambiguous. Two different literatures provide evidence for their opposite ideas. Whether the demand shocks improve or impair workers’ safety? How’s employers’ incentives regarding on safety when facing the demand shocks? 
+ - The effect that demand conditions bring because of firm attributes or exogenous market forces is ambiguous. Do the demand shocks improve or impair workers’ safety? What's the role of opportunity cost affect in the analysis? How’s employers’ incentives regarding on safety when facing the demand shocks? 
 
 **Hypothesis:**
  - Positive demand shocks impair workplace safety. And the results might be contradicted with existing research. Opportunity costs and financial constraints have meaningful impacts on the safety and health of workers.  
 
 **Theories that supported this hypothesis:**
- - Demand and labor market
+ - Demand increases, the prices and profits of products increase as well. Therefore, more investment on workers' safety
+ - Opportunity cost effect
+ - increase of price of identical product from other companies have negative effect on the injury rate
 
 
 ### Source V.
