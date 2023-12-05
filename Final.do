@@ -45,6 +45,9 @@ This is to identify the range, standard deviation, percentiles and other statist
 . codebook total_other_illnesses
 *** After the data fix we have to create a couple new varibales to highlight our data. The First varibale will be entitled inj_rate and will be the quotient of total_injuries and annual_average_employees. This will give us the injury rate for each firm in our data set. 
 *** The second variable we will be using is decile, this varibale is seprating annual_average_employees into deciles. 
+*** We also created varibales to make the different type of injurires a rate similar to inj_rate 
+
+
 . gen inj_rate=total_injuries/annual_average_employees
 . summarize inj_rate
 . _pctile annual_average_employees, p(10(10)90)
@@ -62,17 +65,22 @@ This is to identify the range, standard deviation, percentiles and other statist
 . replace decile = 1 if annual_average_employees < 8
 . tabstat annual_average_employees, by(decile) s(n sum mean)
 
+. gen total_respiratory_conditionsrate=total_respiratory_conditions/annual_average_employees
+. gen total_poisonings_rate=total_poisonings/annual_average_employees
+. gen total_skin_disordersrate=total_skin_disorders/annual_average_employees
+
+
 ** After creating all of the needed variables we can begin to create graphs based on our hypothesis. 
 
-. graph bar total_injuries, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
+. graph bar total_respiratory_conditionsrate, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
 
-. graph bar total_respiratory_conditions, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
+. graph bar total_poisonings_rate, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
 
-. graph bar total_poisoning, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
-
-. graph bar total_skin_disorders, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
+. graph bar total_skin_disordersrate, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
 
 . graph bar inj_rate, over(decile) blabel(bar) b1title(" Mean Inj_Rate Across Deciles")
+
+. graph box decile, blabel(bar) b1title("Decile Distribution")
 
 
 
