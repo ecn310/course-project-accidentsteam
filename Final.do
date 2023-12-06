@@ -83,6 +83,19 @@ This is to identify the range, standard deviation, percentiles and other statist
 . graph box decile, blabel(bar) b1title("Decile Distribution")
 
 
+** This section of the do file aims to find any possible correlations between the variables above. 
+
+. correlate decile total_skin_disordersrate
+. correlate decile total_poisonings_rate
+. correlate decile total_respiratory_conditionsrate
+. correlate decile inj_rate
+
+** For the variable total_poisonings_rate, the bar graph for the first decile looked interesting, I am including a check for potential outliers
+
+. sum total_poisonings_rate
+. codebook total_poisonings_rate
+. tab total_poisonings_rate
+
 
 
 
