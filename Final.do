@@ -73,23 +73,23 @@ This is to identify the range, standard deviation, percentiles and other statist
 
 ** After creating all of the needed variables we can begin to create graphs based on our hypothesis. 
 
-. graph bar inj_rate, over(decile) blabel(bar) title("Mean Inj_Rate Across Deciles") 
+. graph bar inj_rate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Inj_Rate Across Deciles") 
 
-. graph export RespiratoryDecileBar.png, replace 
+. graph export Inj_RateDecileBar.png, replace 
  
-. graph bar total_respiratory_conditionsrate, over(decile) blabel(bar) title("Repiratory Conditions across Deciles")
+. graph bar total_respiratory_conditionsrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Respiratory Conditions Rate across Deciles")
 
 . graph export RespiratoryDecileBar.png, replace 
 
-. graph bar total_poisonings_rate, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
+. graph bar total_poisonings_rate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Poisoning Rate across Deciles")
 
 . graph export PoisoningsDecileBar.png, replace 
 
-. graph bar total_skin_disordersrate, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
+. graph bar total_skin_disordersrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees")title("Mean Skin Disorder Rate across Deciles")
 
 . graph export SkinDecileBar.png, replace 
 
-. graph box decile, blabel(bar) b1title("Decile Distribution")
+. graph box decile, blabel(bar) title("Decile Distribution")
 
 
 ** This section of the do file aims to find any possible correlations between the variables above. 
