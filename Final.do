@@ -12,7 +12,8 @@ Inital Notes:
 This Do-File iterates off of Anna's do-file by originally taking its ability to import the .csv data, before adapting to the new .dta dataset
 The intention of this do-file is to identify outliers within our variables so that we might be able to fix them.
 *********************************************************/
-. use "C:\Users\asrupert\OneDrive - Syracuse University\Accidents\Data.dta"
+. cd "C:\Users\asrupert\OneDrive - Syracuse University\Accidents"
+. use Data.dta
 /*********************************************************
 This is to identify the range, standard deviation, percentiles and other statistics on the variables. We can note that, as it stands, there are many variables with broken data.
 *********************************************************/
@@ -72,13 +73,21 @@ This is to identify the range, standard deviation, percentiles and other statist
 
 ** After creating all of the needed variables we can begin to create graphs based on our hypothesis. 
 
-. graph bar total_respiratory_conditionsrate, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
+. graph bar inj_rate, over(decile) blabel(bar) title("Mean Inj_Rate Across Deciles") 
+
+. graph export RespiratoryDecileBar.png, replace 
+ 
+. graph bar total_respiratory_conditionsrate, over(decile) blabel(bar) title("Repiratory Conditions across Deciles")
+
+. graph export RespiratoryDecileBar.png, replace 
 
 . graph bar total_poisonings_rate, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
 
+. graph export PoisoningsDecileBar.png, replace 
+
 . graph bar total_skin_disordersrate, over(decile) blabel(bar) b1title("Decile of annual_average_employees")
 
-. graph bar inj_rate, over(decile) blabel(bar) b1title(" Mean Inj_Rate Across Deciles")
+. graph export SkinDecileBar.png, replace 
 
 . graph box decile, blabel(bar) b1title("Decile Distribution")
 
@@ -90,9 +99,14 @@ This is to identify the range, standard deviation, percentiles and other statist
 . correlate decile total_respiratory_conditionsrate
 . correlate decile inj_rate
 
-** For the variable total_poisonings_rate, the bar graph for the first decile looked interesting, I am including a check for potential outliers
+** We are also including sum with detail to understand the descriptive statistics behind each of the varibales we use. 
 
-. sum total_poisonings_rate
+. sum inj_rate, detail 
+. sum total_poisonings_rate, detail
+. sum total_respiratory_conditionsrate, detail
+. sum total_skin_disordersrate, detail
+
+** For the variable total_poisonings_rate, the bar graph for the first decile looked interesting, I am including a check for potential outliers so we can better understand why the first decile was so large. 
 . codebook total_poisonings_rate
 . tab total_poisonings_rate
 
