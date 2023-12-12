@@ -89,7 +89,6 @@ This is to identify the range, standard deviation, percentiles and other statist
 
 . graph export SkinDecileBar.png, replace 
 
-. graph box decile, blabel(bar) title("Decile Distribution")
 
 
 ** This section of the do file aims to find any possible correlations between the variables above. 
@@ -105,10 +104,14 @@ This is to identify the range, standard deviation, percentiles and other statist
 . sum total_poisonings_rate, detail
 . sum total_respiratory_conditionsrate, detail
 . sum total_skin_disordersrate, detail
+. sum decile, detail
 
-** For the variable total_poisonings_rate, the bar graph for the first decile looked interesting, I am including a check for potential outliers so we can better understand why the first decile was so large. 
+** For the variable total_poisonings_rate, the bar graph for the first decile looked interesting, I am including a check for potential outliers so we can better understand why the first decile was so large. We also included a box plot to show the different outliers within each decile and the variance within each decile. 
 . codebook total_poisonings_rate
 . tab total_poisonings_rate
+. graph box inj_rate, over(decile) title("Injury Rate Distribution by Decile")
+. _pctile annual_average_employees, p(10(10)90)
+
 
 
 
