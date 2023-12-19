@@ -10,25 +10,41 @@ Purpose: This do-file explores the data from OSHA from the perspective of our te
 
 Directions: READ BEFORE RUNNING DO FILE
 
+NOTE: We have a copy of the converted data linked in our team Read.Me if you would like to avoid this process. If you want to reproduce everything from scratch you must follow this process. 
+
 Part 1: Opening the data.
 
-1.  Go to the webstie above and press the link entitled CY 2022, this lettering should be blue. This will download a zip file of the data. 
+1. Go to the accidents team public repo found on at this website: https://github.com/ecn310/course-project-accidentsteam
 
-2.  Go to your downloads and press the zip file. This will open the zip file in your downloads. This will not download as a Sata data file, it will download as a CSV file. 
+2. Go to Reproducibility Package Folder. 
 
-3. Converting this CSV file into a a DTA file. 
+3. Press on the Data Folder
 
-3a. Open stata and use this change directory command: cd "C:\Path\To\Your\Folder". This will allow you to save the data to the folder of your choice.
+4. Inside the Data folder press on the file entitled "ITA-data-cy2023.2 (1).zip"
 
-3b. Then, use the following code to import the CSV file: import delimited "yourfile.csv". 
+5. Download the file as a zip. This file will be a CSV file when unzipped.
 
-3c. Then, use the following code to save the file as a STATA date file: save "Data.dta", replace
+6. Now we are going to converting this CSV file into a a DTA file. 
+
+6a. Open stata and make sure there is not data sets open, clear command. 
+
+6b. Then, use the following code to import the CSV file: 
+
+import delimited "C:\Users\asrupert\OneDrive - Syracuse University\Accidents\ITA Data CY 2022 submitted thru 7-31-2023.csv", encoding(UTF-8) 
+
+MAKE SURE YOU CHANGE THE C TO WHERE YOU DOWNLOADED THE FILE!!!!
+
+6c. Then, use the following code to save the file as a STATA date file: 
+
+save "Data.dta", replace
 We used the name data.dta and we reccomend you use the same name to limit any issues when running the do-file. 
 
+6d. Clear! and then before running this file follow the next instructions. 
 
-4. Finally, change the directory of the data based on where you want any logs,graphs, or files saved. 
 
-5. Follow the rest of the do-file, there are notes explaining each part!
+7. Finally, change the directory of the data based on where you want any logs,graphs, or files saved. 
+
+8. Follow the rest of the do-file, there are notes explaining each part!
 *********************************************************/
 . cd "C:\Users\asrupert\OneDrive - Syracuse University\Accidents"
 . use Data.dta
