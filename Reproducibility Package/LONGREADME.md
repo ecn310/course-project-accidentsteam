@@ -22,6 +22,8 @@ NOTE: You do not need to use the replace command because it is good practice to 
 
 ## Important: The following is an explantion of our master do-file which can be found in the reproducibility folder. There is not need to follow these step by step because our master do.file will complete it all at once. However, feel free to follow the rest of the readME
 
+To Skip the Following use stata to open the: [Master.do](https://github.com/ecn310/course-project-accidentsteam/blob/main/Reproducibility%20Package/Master.do)
+
 ## Part 3: Data Fix
 To begin we needed to see if there were any issues within the data that would skew our results. We used the codebook command to identify the range, standard deviation, percentiles and other statistics on the variables. We can note that, as it stands, there are many variables with broken data. We do not use all these variables, but a more holistic approach allowed us to fix as much as possible. 
 1.	`(In MASTER.do, run line 56-67)` We found that the initial standard deviation on the total_djtr_days was unacceptable (119972) with a range of [-54,70247620].
