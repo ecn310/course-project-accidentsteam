@@ -10,6 +10,8 @@ Does establishment size impact worksite accident rates? To answer the question, 
 
 ### Team Information
 
+The accidents team is a group of Class of 2026 students at Syracuse University. Below are the names and emails of all of the group members:
+
  - Anna Rupert: asrupert@syr.edu
  - Yuhan Wang: ywang399@syr.edu
  - Will Waghor: wmwaghor@syr.edu
