@@ -7,3 +7,10 @@ Does establishment size impact worksite accident rates? To answer the question, 
  - [Report](https://github.com/ecn310/course-project-accidentsteam/tree/main/Report)
  - [Reproducibility Package](https://github.com/ecn310/course-project-accidentsteam/tree/main/Reproducibility%20Package)
  - [Working Folder](https://github.com/ecn310/course-project-accidentsteam/tree/main/Working%20Folder)
+
+### Team Information
+
+Anna Rupert
+Yuhan Wang
+Will 
+Tomoyoshi
