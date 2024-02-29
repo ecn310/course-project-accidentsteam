@@ -131,6 +131,8 @@ In doing this, we can now see the injury rate for each level of establishment si
 . gen total_respiratory_conditionsrate=total_respiratory_conditions/annual_average_employees
 . gen total_poisonings_rate=total_poisonings/annual_average_employees
 . gen total_skin_disordersrate=total_skin_disorders/annual_average_employees
+. gen total_hearing_lossrate=total_hearing_loss/annual_average_employees
+. gen total_other_illnessessrate=total_other_illnesses/annual_average_employees
 
 
 /** Part 4: Analysis
@@ -139,7 +141,7 @@ After creating all of the needed variables we can begin to created graphs using 
 
 ****/
 
-. graph bar inj_rate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Inj_Rate Across Deciles") 
+. graph bar inj_rate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Injury Rate Across Deciles") 
 
 . graph export Inj_RateDecileBar.png, replace 
  
@@ -155,6 +157,8 @@ After creating all of the needed variables we can begin to created graphs using 
 
 . graph export SkinDecileBar.png, replace 
 
+. graph bar total_hearing_lossrate, over (decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees")title()
+
 
 
 ** Part 4 continued: This section of the code aims to find any possible correlations between the variables above. Simple correlation testing.
@@ -163,6 +167,8 @@ After creating all of the needed variables we can begin to created graphs using 
 . correlate decile total_poisonings_rate
 . correlate decile total_respiratory_conditionsrate
 . correlate decile inj_rate
+. correlate decile total_hearing_lossrate
+. correlate decile total_other_illnessessrate
 
 ** Part 4 continued: We are also including sum with detail to understand the descriptive statistics behind each of the varibales we use. This way we can understand the mean, median, and standard deviation of all of our varibales. 
 
@@ -171,6 +177,8 @@ After creating all of the needed variables we can begin to created graphs using 
 . sum total_respiratory_conditionsrate, detail
 . sum total_skin_disordersrate, detail
 . sum decile, detail
+. sum total_hearing_lossrate, detail
+. sum total_other_illnessessrate, detail 
 
 /** 
 For the variable total_poisonings_rate, the bar graph for the first decile looked very high compared to other decile groups.
