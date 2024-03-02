@@ -1,0 +1,1183 @@
+------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\asrupert\OneDrive - Syracuse University\Documents\GitHub\course-project-accidentsteam\course-proje
+> ct-accidentsteam\Reproducibility Package\MasterOutput.log
+  log type:  text
+ opened on:  19 Dec 2023, 20:16:44
+
+. do "C:\Users\asrupert\OneDrive - Syracuse University\Documents\GitHub\course-project-accidentsteam\course-project-acci
+> dentsteam\Reproducibility Package\Master.do"
+
+. /*********************************************************
+> Welcome to the Master.Do-File for the Accidents Team Project.
+> 
+> Data Source: OSHA's Accident Reports Data, which can be found at https://www.osha.gov/Establishment-Specific-Injury-an
+> d-Illness-Data
+> 
+> Authors: Accidents Team Members, Anna, Yuhan, Tomoyoshi, and Will. Students at Syracuse University
+> 
+> Purpose: This do-file explores the data from OSHA from the perspective of our team's hypothesis. We are examining the 
+> effect of establishment size on workplace accidnets. The following infromation is seperated into 3 main parts. Examini
+> ng the data, fxing any broken portion of the data, and analzying the data. 
+> 
+> 
+> Directions: READ BEFORE RUNNING DO FILE
+> 
+> NOTE: We have a copy of the converted data linked in our team Read.Me if you would like to avoid this process. If you 
+> want to reproduce everything from scratch you must follow this process. 
+> 
+> Part 1: Opening the data.
+> 
+> 1. Go to the accidents team public repo found on at this website: https://github.com/ecn310/course-project-accidentste
+> am
+> 
+> 2. Go to Reproducibility Package Folder. 
+> 
+> 3. Press on the Data Folder
+> 
+> 4. Inside the Data folder press on the file entitled "ITA-data-cy2023.2 (1).zip"
+> 
+> 5. Download the file as a zip. This file will be a CSV file when unzipped.
+> 
+> 6. Now we are going to converting this CSV file into a a DTA file. 
+> 
+> 6a. Open stata and make sure there is not data sets open, clear command. 
+> 
+> 6b. Then, use the following code to import the CSV file: 
+> 
+> import delimited "C:\Users\asrupert\OneDrive - Syracuse University\Accidents\ITA Data CY 2022 submitted thru 7-31-2023
+> .csv", encoding(UTF-8) 
+> 
+> MAKE SURE YOU CHANGE THE C TO WHERE YOU DOWNLOADED THE FILE!!!!
+> 
+> 6c. Then, use the following code to save the file as a STATA date file: 
+> 
+> save "Data.dta", replace
+> We used the name data.dta and we reccomend you use the same name to limit any issues when running the do-file. 
+> 
+> 6d. Clear! and then before running this file follow the next instructions. 
+> 
+> 
+> 7. Finally, change the directory of the data based on where you want any logs,graphs, or files saved. 
+> 
+> 8. Follow the rest of the do-file, there are notes explaining each part!
+> *********************************************************/
+. . cd "C:\Users\asrupert\OneDrive - Syracuse University\Accidents"
+C:\Users\asrupert\OneDrive - Syracuse University\Accidents
+
+. . use Data.dta
+
+. /*********************************************************
+> Part 2: Data Fix 
+> 
+> To begin we needed to see if there were any issues within the data that would skew our results. We used the codebook c
+> ommand to identify the range, standard deviation, percentiles and other statistics on the variables. We can note that,
+>  as it stands, there are many variables with broken data. We do not use all of these variables, but a more holistic ap
+> proach allowed us to fix as much as possible.
+> *********************************************************/
+. . codebook annual_average_employees 
+
+------------------------------------------------------------------------------------------------------------------------
+annual_average_employees                                                                                     (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (long)
+
+                 range:  [0,1.914e+08]                units:  1
+         unique values:  3,350                    missing .:  68/345,195
+
+                  mean:   1434.43
+              std. dev:    440995
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 8        22        46       108       243
+
+. . codebook total_hours_worked 
+
+------------------------------------------------------------------------------------------------------------------------
+total_hours_worked                                                                                           (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (double)
+
+                 range:  [0,5.813e+09]                units:  1
+         unique values:  195,309                  missing .:  69/345,195
+
+                  mean:    371326
+              std. dev:   1.8e+07
+
+           percentiles:        10%       25%       50%       75%       90%
+                             11162     34006     77888    185395    427770
+
+. . codebook no_injuries_illnesses 
+
+------------------------------------------------------------------------------------------------------------------------
+no_injuries_illnesses                                                                                        (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+
+                 range:  [1,2]                        units:  1
+         unique values:  2                        missing .:  68/345,195
+
+            tabulation:  Freq.  Value
+                       213,295  1
+                       131,832  2
+                            68  .
+
+. . codebook total_deaths 
+
+------------------------------------------------------------------------------------------------------------------------
+total_deaths                                                                                                 (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+
+                 range:  [0,27]                       units:  1
+         unique values:  7                        missing .:  68/345,195
+
+            tabulation:  Freq.  Value
+                       344,247  0
+                           844  1
+                            29  2
+                             4  3
+                             1  4
+                             1  6
+                             1  27
+                            68  .
+
+. . codebook total_injuries 
+
+------------------------------------------------------------------------------------------------------------------------
+total_injuries                                                                                               (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+
+                 range:  [0,3238]                     units:  1
+         unique values:  391                      missing .:  68/345,195
+
+                  mean:   3.85031
+              std. dev:   17.1705
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         1         3         8
+
+. . codebook total_poisonings 
+
+------------------------------------------------------------------------------------------------------------------------
+total_poisonings                                                                                             (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+
+                 range:  [0,13]                       units:  1
+         unique values:  12                       missing .:  68/345,195
+
+                  mean:   .002017
+              std. dev:   .071342
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. . codebook total_respiratory_conditions 
+
+------------------------------------------------------------------------------------------------------------------------
+total_respiratory_conditions                                                                                 (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+
+                 range:  [0,1696]                     units:  1
+         unique values:  255                      missing .:  68/345,195
+
+                  mean:   .782318
+              std. dev:   9.79783
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. . codebook total_skin_disorders 
+
+------------------------------------------------------------------------------------------------------------------------
+total_skin_disorders                                                                                         (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+
+                 range:  [0,55]                       units:  1
+         unique values:  23                       missing .:  68/345,195
+
+                  mean:   .019668
+              std. dev:   .286013
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. . codebook total_hearing_loss 
+
+------------------------------------------------------------------------------------------------------------------------
+total_hearing_loss                                                                                           (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+
+                 range:  [0,116]                      units:  1
+         unique values:  44                       missing .:  68/345,195
+
+                  mean:   .032663
+              std. dev:   .630405
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. . codebook total_other_illnesses 
+
+------------------------------------------------------------------------------------------------------------------------
+total_other_illnesses                                                                                        (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+
+                 range:  [0,655]                      units:  1
+         unique values:  154                      missing .:  68/345,195
+
+                  mean:    .26835
+              std. dev:   3.85572
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. . codebook establishment_id 
+
+------------------------------------------------------------------------------------------------------------------------
+establishment_id                                                                                             (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (long)
+
+                 range:  [41924,1062022]              units:  1
+         unique values:  345,127                  missing .:  68/345,195
+
+                  mean:    714099
+              std. dev:    305378
+
+           percentiles:        10%       25%       50%       75%       90%
+                            203621    468453    831537    971174   1.0e+06
+
+. . codebook establishment_type size
+
+------------------------------------------------------------------------------------------------------------------------
+establishment_type                                                                                           (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+
+                 range:  [0,3]                        units:  1
+         unique values:  4                        missing .:  1,589/345,195
+
+            tabulation:  Freq.  Value
+                            47  0
+                       328,366  1
+                         5,353  2
+                         9,840  3
+                         1,589  .
+
+------------------------------------------------------------------------------------------------------------------------
+size                                                                                                         (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+
+                 range:  [1,3]                        units:  1
+         unique values:  3                        missing .:  68/345,195
+
+            tabulation:  Freq.  Value
+                        60,105  1
+                       247,240  2
+                        37,782  3
+                            68  .
+
+. 
+. /*********************************************************
+> First, we found that the initial standard deviation on the total_djtr_days var. was unacceptable (119972) with a range
+>  of [-54,70247620]. 
+> 
+> Second, The code below changes any physically impossible data points to null. In doing so we managed to marginally imp
+> rove the variable (std dev 418.458, range [0,94903]) as well as a notable change mean (291.686 => 62.2916). 
+> 
+> ****************************************************************/
+. 
+. . replace total_djtr_days = . if total_djtr_days>total_hours_worked | total_djtr_days<0 | total_djtr_days==total_hours
+> _worked
+(1,237 real changes made, 1,237 to missing)
+
+. . replace annual_average_employees = . if annual_average_employees>total_hours_worked | annual_average_employees<0 | a
+> nnual_average_employees==total_hours_worked | annual_average_employees==123456 | annual_average_employees==123546
+(1,401 real changes made, 1,401 to missing)
+
+. 
+. 
+. 
+. /***********************
+> The following variables are the focus point of our report. Overall, they are in good condition generally. There are no
+>  clear mistakes in the data that would promote an ethical exclusion. 
+> 
+> The only exception is annual_average_employees, there is outliers present but we cannot delete data points that are te
+> chnically possible. 
+> ********/
+. 
+. 
+. . codebook annual_average_employees
+
+------------------------------------------------------------------------------------------------------------------------
+annual_average_employees                                                                                     (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (long)
+
+                 range:  [0,817067]                   units:  1
+         unique values:  3,270                    missing .:  1,469/345,195
+
+                  mean:   130.164
+              std. dev:   1485.92
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 8        22        46       108       244
+
+. . codebook total_deaths 
+
+------------------------------------------------------------------------------------------------------------------------
+total_deaths                                                                                                 (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+
+                 range:  [0,27]                       units:  1
+         unique values:  7                        missing .:  68/345,195
+
+            tabulation:  Freq.  Value
+                       344,247  0
+                           844  1
+                            29  2
+                             4  3
+                             1  4
+                             1  6
+                             1  27
+                            68  .
+
+. . codebook total_injuries
+
+------------------------------------------------------------------------------------------------------------------------
+total_injuries                                                                                               (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+
+                 range:  [0,3238]                     units:  1
+         unique values:  391                      missing .:  68/345,195
+
+                  mean:   3.85031
+              std. dev:   17.1705
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         1         3         8
+
+. . codebook total_poisonings
+
+------------------------------------------------------------------------------------------------------------------------
+total_poisonings                                                                                             (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+
+                 range:  [0,13]                       units:  1
+         unique values:  12                       missing .:  68/345,195
+
+                  mean:   .002017
+              std. dev:   .071342
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. . codebook total_respiratory_conditions
+
+------------------------------------------------------------------------------------------------------------------------
+total_respiratory_conditions                                                                                 (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+
+                 range:  [0,1696]                     units:  1
+         unique values:  255                      missing .:  68/345,195
+
+                  mean:   .782318
+              std. dev:   9.79783
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. . codebook total_skin_disorders
+
+------------------------------------------------------------------------------------------------------------------------
+total_skin_disorders                                                                                         (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+
+                 range:  [0,55]                       units:  1
+         unique values:  23                       missing .:  68/345,195
+
+                  mean:   .019668
+              std. dev:   .286013
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. . codebook total_hearing_loss 
+
+------------------------------------------------------------------------------------------------------------------------
+total_hearing_loss                                                                                           (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+
+                 range:  [0,116]                      units:  1
+         unique values:  44                       missing .:  68/345,195
+
+                  mean:   .032663
+              std. dev:   .630405
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. . codebook total_other_illnesses
+
+------------------------------------------------------------------------------------------------------------------------
+total_other_illnesses                                                                                        (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+
+                 range:  [0,655]                      units:  1
+         unique values:  154                      missing .:  68/345,195
+
+                  mean:    .26835
+              std. dev:   3.85572
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. 
+. 
+. /*** 
+> Part 3: Creating new Variables. 
+> 
+> To approach our hypothesis we need to create variables that make analysis more straight forward. 
+> 
+> 1. The first varibale created is entitled inj_rate and will be the quotient of total_injuries and annual_average_emplo
+> yees. This will give us the injury rate for each establishment in our data set. 
+> 
+> 2. We will replicate this new across all of the injury types we are analzying, total_respiratory_conditions, and total
+> _skin_disorders, total_poisonings. 
+> 
+> 3. The next variable we will be creating is entitled is decile, this varibale is seprating annual_average_employees in
+> to deciles based on percentiles. 
+> 
+> In doing this, we can now see the injury rate for each level of establishment size instead of just acorss all firms. T
+> his will make our analysis much easier to present.
+>  
+> ***/
+. 
+. 
+. . gen inj_rate=total_injuries/annual_average_employees
+(1,616 missing values generated)
+
+. . summarize inj_rate
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    inj_rate |    343,579    .0352498    .0882406          0         28
+
+. . _pctile annual_average_employees, p(10(10)90)
+
+. . ret li
+
+scalars:
+                 r(r1) =  8
+                 r(r2) =  19
+                 r(r3) =  25
+                 r(r4) =  34
+                 r(r5) =  46
+                 r(r6) =  64
+                 r(r7) =  90
+                 r(r8) =  135
+                 r(r9) =  244
+
+. . sum annual_average_employees, detail
+
+                  annual_average_employees
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            1              0
+ 5%            3              0
+10%            8              0       Obs             343,726
+25%           22              0       Sum of Wgt.     343,726
+
+50%           46                      Mean           130.1643
+                        Largest       Std. Dev.      1485.924
+75%          108          63110
+90%          244          64728       Variance        2207971
+95%          400          81364       Skewness       485.2996
+99%         1378         817067       Kurtosis         265861
+
+. . gen decile = 10
+
+. . replace decile = 9 if annual_average_employees < 243
+(309,204 real changes made)
+
+. . replace decile = 8 if annual_average_employees < 134
+(274,301 real changes made)
+
+. . replace decile = 7 if annual_average_employees < 89
+(239,644 real changes made)
+
+. . replace decile = 6 if annual_average_employees < 64
+(205,771 real changes made)
+
+. . replace decile = 5 if annual_average_employees < 46
+(170,813 real changes made)
+
+. . replace decile = 4 if annual_average_employees < 34
+(136,254 real changes made)
+
+. . replace decile = 3 if annual_average_employees < 25
+(98,900 real changes made)
+
+. . replace decile = 2 if annual_average_employees < 19
+(66,427 real changes made)
+
+. . replace decile = 1 if annual_average_employees < 8
+(32,910 real changes made)
+
+. . tabstat annual_average_employees, by(decile) s(n sum mean)
+
+Summary for variables: annual_average_employees
+     by categories of: decile 
+
+  decile |         N       sum      mean
+---------+------------------------------
+       1 |     32910    112525  3.419174
+       2 |     33517    437096  13.04102
+       3 |     32473    699872  21.55243
+       4 |     37354   1069975  28.64419
+       5 |     34559   1355118  39.21172
+       6 |     34958   1882309  53.84487
+       7 |     33873   2539781  74.97951
+       8 |     34657   3762114  108.5528
+       9 |     34903   6152944   176.287
+      10 |     34522  2.67e+07  774.2635
+---------+------------------------------
+   Total |    343726  4.47e+07  130.1643
+----------------------------------------
+
+. 
+. . gen total_respiratory_conditionsrate=total_respiratory_conditions/annual_average_employees
+(1,616 missing values generated)
+
+. . gen total_poisonings_rate=total_poisonings/annual_average_employees
+(1,616 missing values generated)
+
+. . gen total_skin_disordersrate=total_skin_disorders/annual_average_employees
+(1,616 missing values generated)
+
+. 
+. 
+. /** Part 4: Analysis
+> 
+> After creating all of the needed variables we can begin to created graphs using the mean rate for total injuries and t
+> he injury types over decile groups to test on our hypothesis. We would have used median but due to 0 being the common 
+> median aross variables most of the graphs were not helpful for further analysis. 
+> 
+> ****/
+. 
+. . graph bar inj_rate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("
+> Mean Inj_Rate Across Deciles") 
+
+. 
+. . graph export Inj_RateDecileBar.png, replace 
+(file Inj_RateDecileBar.png written in PNG format)
+
+.  
+. . graph bar total_respiratory_conditionsrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Numbe
+> r of Employees") title("Mean Respiratory Conditions Rate across Deciles")
+
+. 
+. . graph export RespiratoryDecileBar.png, replace 
+(file RespiratoryDecileBar.png written in PNG format)
+
+. 
+. . graph bar total_poisonings_rate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employ
+> ees") title("Mean Poisoning Rate across Deciles")
+
+. 
+. . graph export PoisoningsDecileBar.png, replace 
+(file PoisoningsDecileBar.png written in PNG format)
+
+. 
+. . graph bar total_skin_disordersrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Emp
+> loyees")title("Mean Skin Disorder Rate across Deciles")
+
+. 
+. . graph export SkinDecileBar.png, replace 
+(file SkinDecileBar.png written in PNG format)
+
+. 
+. 
+. 
+. ** Part 4 continued: This section of the code aims to find any possible correlations between the variables above. Simp
+> le correlation testing.
+. 
+. . correlate decile total_skin_disordersrate
+(obs=343,579)
+
+             |   decile t~rsrate
+-------------+------------------
+      decile |   1.0000
+total_skin~e |  -0.0031   1.0000
+
+
+. . correlate decile total_poisonings_rate
+(obs=343,579)
+
+             |   decile to~_rate
+-------------+------------------
+      decile |   1.0000
+total_pois~e |  -0.0025   1.0000
+
+
+. . correlate decile total_respiratory_conditionsrate
+(obs=343,579)
+
+             |   decile t~nsrate
+-------------+------------------
+      decile |   1.0000
+total_resp~e |   0.0286   1.0000
+
+
+. . correlate decile inj_rate
+(obs=343,579)
+
+             |   decile inj_rate
+-------------+------------------
+      decile |   1.0000
+    inj_rate |  -0.0136   1.0000
+
+
+. 
+. ** Part 4 continued: We are also including sum with detail to understand the descriptive statistics behind each of the
+>  varibales we use. This way we can understand the mean, median, and standard deviation of all of our varibales. 
+. 
+. . sum inj_rate, detail 
+
+                          inj_rate
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs             343,579
+25%            0              0       Sum of Wgt.     343,579
+
+50%      .017094                      Mean           .0352498
+                        Largest       Std. Dev.      .0882406
+75%      .047619            7.5
+90%     .0909091        9.37037       Variance       .0077864
+95%         .125       10.76596       Skewness       110.8861
+99%          .25             28       Kurtosis       30824.06
+
+. . sum total_poisonings_rate, detail
+
+                    total_poisonings_rate
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs             343,579
+25%            0              0       Sum of Wgt.     343,579
+
+50%            0                      Mean           .0000231
+                        Largest       Std. Dev.      .0021069
+75%            0            .25
+90%            0       .2857143       Variance       4.44e-06
+95%            0           .375       Skewness       345.4809
+99%            0              1       Kurtosis       152476.3
+
+. . sum total_respiratory_conditionsrate, detail
+
+              total_respiratory_conditionsrate
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs             343,579
+25%            0              0       Sum of Wgt.     343,579
+
+50%            0                      Mean            .006328
+                        Largest       Std. Dev.      .0474458
+75%            0              4
+90%            0       4.166667       Variance       .0022511
+95%     .0149166            4.5       Skewness       20.82136
+99%     .1666667          4.625       Kurtosis       1053.067
+
+. . sum total_skin_disordersrate, detail
+
+                  total_skin_disordersrate
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs             343,579
+25%            0              0       Sum of Wgt.     343,579
+
+50%            0                      Mean           .0001993
+                        Largest       Std. Dev.      .0054231
+75%            0       .6666667
+90%            0              1       Variance       .0000294
+95%            0              1       Skewness       201.7602
+99%     .0029499              2       Kurtosis       62174.46
+
+. . sum decile, detail
+
+                           decile
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            1              1
+ 5%            1              1
+10%            2              1       Obs             345,195
+25%            3              1       Sum of Wgt.     345,195
+
+50%            6                      Mean           5.555486
+                        Largest       Std. Dev.      2.863028
+75%            8             10
+90%           10             10       Variance       8.196927
+95%           10             10       Skewness      -.0133872
+99%           10             10       Kurtosis       1.788441
+
+. 
+. /** 
+> For the variable total_poisonings_rate, the bar graph for the first decile looked very high compared to other decile g
+> roups.
+> 
+> We are including a check for potential outliers so we can better understand why the first decile was so large.
+> 
+> We also included a box plot to show the different outliers within each decile and the variance within each decile.
+>  
+>  ******/
+. . codebook total_poisonings_rate
+
+------------------------------------------------------------------------------------------------------------------------
+total_poisonings_rate                                                                                        (unlabeled)
+------------------------------------------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+
+                 range:  [0,1]                        units:  1.000e-12
+         unique values:  363                      missing .:  1,616/345,195
+
+                  mean:   .000023
+              std. dev:   .002107
+
+           percentiles:        10%       25%       50%       75%       90%
+                                 0         0         0         0         0
+
+. . tab total_poisonings_rate
+
+total_poiso |
+ nings_rate |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |    343,085       99.86       99.86
+   .0000369 |          1        0.00       99.86
+   .0000705 |          1        0.00       99.86
+   .0000726 |          1        0.00       99.86
+   .0001225 |          1        0.00       99.86
+   .0001255 |          1        0.00       99.86
+   .0001257 |          1        0.00       99.86
+   .0001362 |          1        0.00       99.86
+    .000142 |          1        0.00       99.86
+   .0001636 |          1        0.00       99.86
+   .0001712 |          1        0.00       99.86
+   .0001846 |          1        0.00       99.86
+   .0002096 |          1        0.00       99.86
+   .0002218 |          1        0.00       99.86
+   .0002434 |          1        0.00       99.86
+   .0002447 |          1        0.00       99.86
+   .0002771 |          1        0.00       99.86
+   .0002777 |          1        0.00       99.86
+   .0002802 |          1        0.00       99.86
+   .0002831 |          1        0.00       99.86
+    .000292 |          1        0.00       99.86
+   .0003235 |          1        0.00       99.86
+   .0003309 |          1        0.00       99.86
+   .0003393 |          1        0.00       99.86
+   .0003465 |          1        0.00       99.86
+   .0003655 |          1        0.00       99.86
+   .0003694 |          1        0.00       99.86
+   .0003738 |          1        0.00       99.86
+    .000374 |          1        0.00       99.86
+   .0003937 |          1        0.00       99.86
+   .0004139 |          1        0.00       99.86
+   .0004155 |          1        0.00       99.87
+   .0004325 |          1        0.00       99.87
+   .0004335 |          1        0.00       99.87
+   .0004513 |          1        0.00       99.87
+   .0004545 |          1        0.00       99.87
+   .0004598 |          1        0.00       99.87
+   .0004883 |          1        0.00       99.87
+     .00052 |          1        0.00       99.87
+   .0005382 |          1        0.00       99.87
+   .0005602 |          1        0.00       99.87
+   .0005643 |          1        0.00       99.87
+   .0005666 |          1        0.00       99.87
+   .0005672 |          1        0.00       99.87
+   .0005785 |          1        0.00       99.87
+   .0005921 |          1        0.00       99.87
+   .0006231 |          2        0.00       99.87
+   .0006698 |          1        0.00       99.87
+   .0006749 |          1        0.00       99.87
+   .0007559 |          1        0.00       99.87
+   .0007746 |          1        0.00       99.87
+     .00078 |          1        0.00       99.87
+   .0007962 |          1        0.00       99.87
+   .0008319 |          1        0.00       99.87
+   .0008333 |          1        0.00       99.87
+   .0008489 |          1        0.00       99.87
+   .0008666 |          1        0.00       99.87
+   .0008681 |          1        0.00       99.87
+   .0008688 |          1        0.00       99.87
+   .0008757 |          1        0.00       99.87
+   .0009158 |          1        0.00       99.87
+   .0009294 |          1        0.00       99.87
+   .0009515 |          1        0.00       99.87
+    .000956 |          1        0.00       99.87
+   .0009766 |          1        0.00       99.88
+   .0010057 |          1        0.00       99.88
+    .001046 |          1        0.00       99.88
+   .0010823 |          1        0.00       99.88
+   .0010989 |          1        0.00       99.88
+    .001105 |          1        0.00       99.88
+   .0011111 |          2        0.00       99.88
+   .0011123 |          1        0.00       99.88
+   .0011173 |          1        0.00       99.88
+   .0011198 |          1        0.00       99.88
+   .0011211 |          1        0.00       99.88
+   .0011468 |          1        0.00       99.88
+   .0011521 |          2        0.00       99.88
+   .0011587 |          1        0.00       99.88
+   .0011682 |          1        0.00       99.88
+   .0011862 |          1        0.00       99.88
+   .0012156 |          1        0.00       99.88
+    .001227 |          1        0.00       99.88
+    .001233 |          1        0.00       99.88
+   .0012469 |          1        0.00       99.88
+   .0012521 |          1        0.00       99.88
+   .0012626 |          1        0.00       99.88
+   .0012723 |          1        0.00       99.88
+   .0012804 |          1        0.00       99.88
+   .0013106 |          1        0.00       99.88
+   .0013149 |          1        0.00       99.88
+   .0013316 |          1        0.00       99.88
+   .0013333 |          1        0.00       99.88
+   .0014065 |          1        0.00       99.88
+   .0014793 |          1        0.00       99.88
+   .0015106 |          1        0.00       99.88
+   .0015175 |          1        0.00       99.88
+   .0015244 |          1        0.00       99.89
+   .0015456 |          1        0.00       99.89
+    .001548 |          1        0.00       99.89
+   .0015552 |          1        0.00       99.89
+   .0015699 |          1        0.00       99.89
+   .0016077 |          1        0.00       99.89
+    .001626 |          1        0.00       99.89
+   .0016611 |          1        0.00       99.89
+   .0016667 |          1        0.00       99.89
+    .001675 |          1        0.00       99.89
+   .0017606 |          2        0.00       99.89
+   .0017668 |          1        0.00       99.89
+   .0017921 |          1        0.00       99.89
+   .0018622 |          1        0.00       99.89
+   .0019048 |          1        0.00       99.89
+   .0019841 |          1        0.00       99.89
+    .002006 |          1        0.00       99.89
+   .0020964 |          1        0.00       99.89
+   .0021231 |          1        0.00       99.89
+   .0021459 |          1        0.00       99.89
+   .0022124 |          1        0.00       99.89
+   .0022173 |          1        0.00       99.89
+   .0022321 |          1        0.00       99.89
+   .0022523 |          1        0.00       99.89
+   .0022676 |          1        0.00       99.89
+   .0023753 |          1        0.00       99.89
+    .002457 |          1        0.00       99.89
+   .0024691 |          1        0.00       99.89
+   .0024876 |          2        0.00       99.89
+   .0024938 |          1        0.00       99.89
+   .0025253 |          1        0.00       99.89
+   .0025284 |          1        0.00       99.89
+   .0025575 |          1        0.00       99.89
+   .0025597 |          1        0.00       99.90
+   .0025707 |          2        0.00       99.90
+   .0025723 |          1        0.00       99.90
+   .0025974 |          1        0.00       99.90
+   .0026525 |          1        0.00       99.90
+   .0026596 |          1        0.00       99.90
+   .0027933 |          1        0.00       99.90
+   .0028011 |          1        0.00       99.90
+   .0028249 |          1        0.00       99.90
+   .0028329 |          1        0.00       99.90
+   .0028409 |          1        0.00       99.90
+   .0028571 |          1        0.00       99.90
+   .0029412 |          1        0.00       99.90
+   .0029674 |          1        0.00       99.90
+    .003003 |          1        0.00       99.90
+    .003012 |          1        0.00       99.90
+   .0030303 |          1        0.00       99.90
+   .0030581 |          1        0.00       99.90
+   .0031348 |          1        0.00       99.90
+   .0031847 |          1        0.00       99.90
+   .0031949 |          1        0.00       99.90
+   .0032051 |          1        0.00       99.90
+   .0032258 |          1        0.00       99.90
+   .0032293 |          1        0.00       99.90
+   .0033003 |          2        0.00       99.90
+   .0033333 |         22        0.01       99.91
+   .0033501 |          1        0.00       99.91
+   .0034014 |          1        0.00       99.91
+   .0034602 |          1        0.00       99.91
+   .0034722 |          1        0.00       99.91
+   .0034843 |          1        0.00       99.91
+   .0035461 |          1        0.00       99.91
+   .0035714 |          1        0.00       99.91
+   .0036232 |          1        0.00       99.91
+   .0036496 |          1        0.00       99.91
+   .0037037 |          1        0.00       99.91
+     .00375 |          1        0.00       99.91
+   .0037736 |          1        0.00       99.91
+   .0038023 |          2        0.00       99.91
+   .0038314 |          1        0.00       99.91
+   .0038462 |          1        0.00       99.91
+   .0039063 |          1        0.00       99.91
+   .0039841 |          1        0.00       99.91
+       .004 |          1        0.00       99.91
+   .0040816 |          1        0.00       99.92
+   .0041408 |          1        0.00       99.92
+   .0042373 |          1        0.00       99.92
+   .0042553 |          1        0.00       99.92
+   .0043103 |          1        0.00       99.92
+   .0043478 |          1        0.00       99.92
+   .0043668 |          1        0.00       99.92
+   .0044053 |          1        0.00       99.92
+   .0044444 |          3        0.00       99.92
+   .0044843 |          2        0.00       99.92
+   .0045455 |          1        0.00       99.92
+   .0045872 |          1        0.00       99.92
+   .0046729 |          1        0.00       99.92
+    .004717 |          1        0.00       99.92
+   .0047393 |          1        0.00       99.92
+   .0047847 |          2        0.00       99.92
+   .0048193 |          1        0.00       99.92
+   .0048544 |          1        0.00       99.92
+   .0049261 |          1        0.00       99.92
+   .0049383 |          1        0.00       99.92
+   .0049505 |          1        0.00       99.92
+   .0049751 |          1        0.00       99.92
+       .005 |          1        0.00       99.92
+   .0050251 |          1        0.00       99.92
+    .005102 |          1        0.00       99.92
+   .0051282 |          1        0.00       99.92
+   .0051546 |          3        0.00       99.92
+   .0053191 |          1        0.00       99.92
+   .0053476 |          1        0.00       99.92
+   .0054945 |          1        0.00       99.93
+   .0055556 |          1        0.00       99.93
+   .0056497 |          1        0.00       99.93
+   .0056818 |          1        0.00       99.93
+   .0057471 |          1        0.00       99.93
+    .005814 |          2        0.00       99.93
+    .005848 |          2        0.00       99.93
+   .0058824 |          1        0.00       99.93
+   .0058997 |          1        0.00       99.93
+   .0060241 |          1        0.00       99.93
+    .006079 |          1        0.00       99.93
+   .0060976 |          1        0.00       99.93
+    .006135 |          1        0.00       99.93
+   .0061728 |          1        0.00       99.93
+   .0062112 |          1        0.00       99.93
+     .00625 |          1        0.00       99.93
+   .0062893 |          2        0.00       99.93
+   .0063291 |          1        0.00       99.93
+   .0063694 |          1        0.00       99.93
+   .0064103 |          1        0.00       99.93
+   .0064516 |          2        0.00       99.93
+   .0065359 |          1        0.00       99.93
+   .0065789 |          2        0.00       99.93
+   .0066225 |          1        0.00       99.93
+   .0066667 |          2        0.00       99.93
+   .0069204 |          1        0.00       99.93
+   .0070922 |          1        0.00       99.93
+   .0071429 |          1        0.00       99.93
+   .0071813 |          1        0.00       99.94
+   .0072464 |          1        0.00       99.94
+   .0072993 |          1        0.00       99.94
+   .0073529 |          2        0.00       99.94
+   .0074627 |          1        0.00       99.94
+   .0075188 |          1        0.00       99.94
+   .0075758 |          1        0.00       99.94
+   .0076336 |          1        0.00       99.94
+   .0076923 |          1        0.00       99.94
+   .0077519 |          1        0.00       99.94
+    .007874 |          2        0.00       99.94
+       .008 |          4        0.00       99.94
+   .0080645 |          2        0.00       99.94
+   .0081967 |          2        0.00       99.94
+   .0083333 |          1        0.00       99.94
+   .0084034 |          2        0.00       99.94
+    .008547 |          2        0.00       99.94
+   .0086207 |          3        0.00       99.94
+   .0086705 |          1        0.00       99.94
+   .0087719 |          1        0.00       99.94
+   .0088889 |          1        0.00       99.94
+   .0089286 |          1        0.00       99.94
+   .0090909 |          3        0.00       99.95
+   .0091743 |          2        0.00       99.95
+   .0092593 |          1        0.00       99.95
+    .009434 |          1        0.00       99.95
+   .0095238 |          1        0.00       99.95
+   .0097087 |          2        0.00       99.95
+   .0098039 |          1        0.00       99.95
+    .009901 |          1        0.00       99.95
+        .01 |          1        0.00       99.95
+    .010101 |          2        0.00       99.95
+   .0102041 |          3        0.00       99.95
+   .0103806 |          1        0.00       99.95
+   .0104167 |          3        0.00       99.95
+   .0105263 |          1        0.00       99.95
+   .0106383 |          1        0.00       99.95
+   .0108696 |          1        0.00       99.95
+    .010989 |          2        0.00       99.95
+    .011236 |          1        0.00       99.95
+   .0113636 |          1        0.00       99.95
+   .0114286 |          1        0.00       99.95
+   .0114943 |          5        0.00       99.95
+   .0116279 |          3        0.00       99.96
+   .0117647 |          4        0.00       99.96
+   .0119048 |          3        0.00       99.96
+   .0121212 |          1        0.00       99.96
+   .0121951 |          1        0.00       99.96
+   .0123457 |          1        0.00       99.96
+   .0126582 |          1        0.00       99.96
+   .0128205 |          2        0.00       99.96
+    .012987 |          1        0.00       99.96
+   .0133333 |          3        0.00       99.96
+   .0135135 |          2        0.00       99.96
+   .0136054 |          1        0.00       99.96
+   .0136187 |          1        0.00       99.96
+   .0136986 |          1        0.00       99.96
+   .0138889 |          1        0.00       99.96
+   .0140845 |          2        0.00       99.96
+   .0142857 |          3        0.00       99.96
+   .0144928 |          1        0.00       99.96
+   .0147059 |          1        0.00       99.96
+   .0149254 |          1        0.00       99.96
+   .0151515 |          3        0.00       99.97
+   .0153846 |          3        0.00       99.97
+    .015625 |          2        0.00       99.97
+    .015873 |          2        0.00       99.97
+    .016129 |          2        0.00       99.97
+   .0163934 |          5        0.00       99.97
+   .0166667 |          2        0.00       99.97
+   .0169492 |          1        0.00       99.97
+   .0172414 |          2        0.00       99.97
+   .0175439 |          1        0.00       99.97
+   .0178571 |          3        0.00       99.97
+   .0181818 |          1        0.00       99.97
+   .0188679 |          2        0.00       99.97
+   .0192308 |          2        0.00       99.97
+   .0196078 |          1        0.00       99.97
+        .02 |          4        0.00       99.97
+   .0208333 |          2        0.00       99.98
+   .0212766 |          2        0.00       99.98
+   .0217391 |          2        0.00       99.98
+   .0222222 |          3        0.00       99.98
+   .0225225 |          1        0.00       99.98
+   .0238095 |          1        0.00       99.98
+   .0243902 |          1        0.00       99.98
+   .0247934 |          1        0.00       99.98
+       .025 |          4        0.00       99.98
+   .0263158 |          1        0.00       99.98
+    .027027 |          2        0.00       99.98
+   .0275229 |          1        0.00       99.98
+   .0277778 |          2        0.00       99.98
+    .028169 |          1        0.00       99.98
+   .0285714 |          2        0.00       99.98
+   .0292398 |          1        0.00       99.98
+   .0294118 |          1        0.00       99.98
+    .030303 |          2        0.00       99.98
+     .03125 |          2        0.00       99.98
+    .031746 |          1        0.00       99.98
+   .0333333 |          5        0.00       99.99
+   .0344828 |          2        0.00       99.99
+    .037037 |          2        0.00       99.99
+      .0375 |          1        0.00       99.99
+   .0377358 |          1        0.00       99.99
+   .0384615 |          5        0.00       99.99
+        .04 |          4        0.00       99.99
+   .0410959 |          1        0.00       99.99
+   .0434783 |          2        0.00       99.99
+   .0437956 |          1        0.00       99.99
+   .0454545 |          2        0.00       99.99
+   .0471698 |          1        0.00       99.99
+    .047619 |          3        0.00       99.99
+        .05 |          2        0.00       99.99
+   .0526316 |          1        0.00       99.99
+   .0597015 |          1        0.00       99.99
+   .0618557 |          1        0.00       99.99
+      .0625 |          2        0.00      100.00
+   .0681818 |          1        0.00      100.00
+   .0714286 |          1        0.00      100.00
+   .0740741 |          1        0.00      100.00
+   .0769231 |          1        0.00      100.00
+   .0777778 |          1        0.00      100.00
+   .0789474 |          1        0.00      100.00
+   .0833333 |          1        0.00      100.00
+       .088 |          1        0.00      100.00
+   .0909091 |          1        0.00      100.00
+    .131579 |          1        0.00      100.00
+   .1428571 |          1        0.00      100.00
+   .1666667 |          1        0.00      100.00
+        .25 |          1        0.00      100.00
+   .2857143 |          1        0.00      100.00
+       .375 |          1        0.00      100.00
+          1 |          1        0.00      100.00
+------------+-----------------------------------
+      Total |    343,579      100.00
+
+. . graph box inj_rate, over(decile) title("Injury Rate Distribution by Decile")
+
+. . _pctile annual_average_employees, p(10(10)90)
+
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+end of do-file
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\asrupert\OneDrive - Syracuse University\Documents\GitHub\course-project-accidentsteam\course-proje
+> ct-accidentsteam\Reproducibility Package\MasterOutput.log
+  log type:  text
+ closed on:  19 Dec 2023, 20:18:20
+------------------------------------------------------------------------------------------------------------------------
