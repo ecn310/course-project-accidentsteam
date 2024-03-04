@@ -102,7 +102,7 @@ To approach our hypothesis we need to create variables that make analysis more s
 
 1. The first varibale created is entitled inj_rate and will be the quotient of total_injuries and annual_average_employees. This will give us the injury rate for each establishment in our data set. 
 
-2. We will replicate this new across all of the injury types we are analzying, total_respiratory_conditions, and total_skin_disorders, total_poisonings. 
+2. We will replicate this new across all of the injury types we are analzying, total_respiratory_conditions, and total_skin_disorders, total_poisonings, total_other_illnesses, and total_hearing_loss. 
 
 3. The next variable we will be creating is entitled is decile, this varibale is seprating annual_average_employees into deciles based on percentiles. 
 
@@ -137,7 +137,7 @@ In doing this, we can now see the injury rate for each level of establishment si
 
 /** Part 4: Analysis
 
-After creating all of the needed variables we can begin to created graphs using the mean rate for total injuries and the injury types over decile groups to test on our hypothesis. We would have used median but due to 0 being the common median aross variables most of the graphs were not helpful for further analysis. 
+After creating all of the needed variables we can begin to created graphs using the mean rate for total injuries and the injury types over decile groups to test on our hypothesis. We would have used median but due to 0 being the common median aross variables most of the graphs were not helpful for further analysis. We also include a summary statistics table to compare the important descriptive statistics for these varibales. 
 
 ****/
 
@@ -160,6 +160,11 @@ After creating all of the needed variables we can begin to created graphs using 
 . graph bar total_hearing_lossrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees")title("Mean Hearing Loss Rate Across Deciles")
 
  graph export HearingDecileBar.png, replace
+ 
+ ** Summary Statistics Table.
+ 
+ 
+ 
 
 ** Part 4 continued: This section of the code aims to find any possible correlations between the variables above. Simple correlation testing.
 
