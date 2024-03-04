@@ -157,9 +157,9 @@ After creating all of the needed variables we can begin to created graphs using 
 
 . graph export SkinDecileBar.png, replace 
 
-. graph bar total_hearing_lossrate, over (decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees")title()
+. graph bar total_hearing_lossrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees")title("Mean Hearing Loss Rate Across Deciles")
 
-
+ graph export HearingDecileBar.png, replace
 
 ** Part 4 continued: This section of the code aims to find any possible correlations between the variables above. Simple correlation testing.
 
