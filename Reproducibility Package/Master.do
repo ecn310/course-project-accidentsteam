@@ -141,23 +141,23 @@ After creating all of the needed variables we can begin to created graphs using 
 
 ****/
 
-. graph bar inj_rate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Injury Rate Across Deciles") 
+. graph bar inj_rate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Injury Rate Across Deciles") ytitle ("Injury Rate")
 
 . graph export Inj_RateDecileBar.png, replace 
  
-. graph bar total_respiratory_conditionsrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Respiratory Conditions Rate across Deciles")
+. graph bar total_respiratory_conditionsrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Respiratory Conditions Rate across Deciles") ytitle ("Injury Rate")
 
 . graph export RespiratoryDecileBar.png, replace 
 
-. graph bar total_poisonings_rate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Poisoning Rate across Deciles")
+. graph bar total_poisonings_rate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Poisoning Rate across Deciles") ytitle ("Injury Rate")
 
 . graph export PoisoningsDecileBar.png, replace 
 
-. graph bar total_skin_disordersrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees")title("Mean Skin Disorder Rate across Deciles")
+. graph bar total_skin_disordersrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees")title("Mean Skin Disorder Rate across Deciles") ytitle ("Injury Rate")
 
 . graph export SkinDecileBar.png, replace 
 
-. graph bar total_hearing_lossrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees")title("Mean Hearing Loss Rate Across Deciles")
+. graph bar total_hearing_lossrate, over(decile) blabel(bar) b1title("Decile Groups For Annual Average Number of Employees") title("Mean Hearing Loss Rate Across Deciles") ytitle ("Injury Rate") 
 
  graph export HearingDecileBar.png, replace
  
@@ -195,7 +195,7 @@ We also included a box plot to show the different outliers within each decile an
  ******/
 . codebook total_poisonings_rate
 . tab total_poisonings_rate
-. graph box inj_rate, over(decile) title("Injury Rate Distribution by Decile")
+. graph box inj_rate, over(decile) title("Injury Rate Distribution by Decile") b1title("Decile Groups For Annual Average Number of Employees") ytitle ("Injury Rate") 
 . _pctile annual_average_employees, p(10(10)90)
 
 
