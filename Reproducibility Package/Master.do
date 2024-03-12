@@ -161,9 +161,8 @@ After creating all of the needed variables we can begin to created graphs using 
 
  graph export HearingDecileBar.png, replace
  
- ** Summary Statistics Table.
- 
- 
+** The code below highlights an important aspect of comparing our data: The Summary Statistics Table. This table compares mean standard deviation coefficent of variation and quartiles. 
+. tabstat total_skin_disordersrate total_poisonings_rate total_respiratory_conditionsrate total_hearing_lossrate total_other_illnessessrate, stat(n mean sd cv q) col(stat)
  
 
 ** Part 4 continued: This section of the code aims to find any possible correlations between the variables above. Simple correlation testing.
