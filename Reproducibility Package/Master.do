@@ -69,7 +69,7 @@ To begin we needed to see if there were any issues within the data that would sk
 /*********************************************************
 First, we found that the initial standard deviation on the total_djtr_days var. was unacceptable (119972) with a range of [-54,70247620]. 
 
-Second, The code below changes any physically impossible data points to null. In doing so we managed to marginally improve the variable (std dev 418.458, range [0,94903]) as well as a notable change mean (291.686 => 62.2916). 
+Second, The code below changes any physically impossible data points to null. In doing so we managed to marginally improve the variable (std dev 418.458, range [0,94903]) as well as a notable change mean (291.686 => 62.2916). This helps reduce the incorrectly entered data points. 
 
 ****************************************************************/
 
@@ -164,6 +164,7 @@ After creating all of the needed variables we can begin to created graphs using 
 ** The code below highlights an important aspect of comparing our data: The Summary Statistics Table. This table compares mean standard deviation coefficent of variation and quartiles. 
 . tabstat total_skin_disordersrate total_poisonings_rate total_respiratory_conditionsrate total_hearing_lossrate total_other_illnessessrate, stat(n mean sd cv q) col(stat)
  
+** FIND A WAY TO EXPORT THE TABLE**
 
 ** Part 4 continued: This section of the code aims to find any possible correlations between the variables above. Simple correlation testing.
 
@@ -196,6 +197,8 @@ We also included a box plot to show the different outliers within each decile an
 . tab total_poisonings_rate
 . graph box inj_rate, over(decile) title("Injury Rate Distribution by Decile") b1title("Decile Groups For Annual Average Number of Employees") ytitle ("Injury Rate") 
 . _pctile annual_average_employees, p(10(10)90)
+
+
 
 
 
