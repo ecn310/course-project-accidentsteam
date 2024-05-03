@@ -69,13 +69,18 @@ To begin we needed to see if there were any issues within the data that would sk
 /*********************************************************
 First, we found that the initial standard deviation on the total_djtr_days var. was unacceptable (119972) with a range of [-54,70247620]. 
 
+
 Second, The code below changes any physically impossible data points to null. In doing so we managed to marginally improve the variable (std dev 418.458, range [0,94903]) as well as a notable change mean (291.686 => 62.2916). This helps reduce the incorrectly entered data points. 
 
 ****************************************************************/
 
 . replace total_djtr_days = . if total_djtr_days>total_hours_worked | total_djtr_days<0 | total_djtr_days==total_hours_worked
+
+***** This step eliminates any impossible data points. 
+
 . replace annual_average_employees = . if annual_average_employees>total_hours_worked | annual_average_employees<0 | annual_average_employees==total_hours_worked | annual_average_employees==123456 | annual_average_employees==123546
 
+**** We used this step to eliminate the data points that would incorrectly skew our data. This points would not be possible and must be explained by a system error. 
 
 
 /***********************
@@ -128,6 +133,8 @@ In doing this, we can now see the injury rate for each level of establishment si
 . replace decile = 1 if annual_average_employees < 8
 . tabstat annual_average_employees, by(decile) s(n sum mean)
 
+** Now that we have created the decile groups for annual_average_employees, we can generate the variables used for the analysis. 
+
 . gen total_respiratory_conditionsrate=total_respiratory_conditions/annual_average_employees
 . gen total_poisonings_rate=total_poisonings/annual_average_employees
 . gen total_skin_disordersrate=total_skin_disorders/annual_average_employees
@@ -163,8 +170,14 @@ After creating all of the needed variables we can begin to created graphs using 
  
 ** The code below highlights an important aspect of comparing our data: The Summary Statistics Table. This table compares mean standard deviation coefficent of variation and quartiles. 
 . tabstat total_skin_disordersrate total_poisonings_rate total_respiratory_conditionsrate total_hearing_lossrate total_other_illnessessrate, stat(n mean sd cv q) col(stat)
- 
-** FIND A WAY TO EXPORT THE TABLE**
+** The next step is to store this estimates using the estpost command, which also saves a bunch of info as e-class locals:
+estpost tabstat total_skin_disordersrate total_poisonings_rate total_respiratory_conditionsrate total_hearing_lossrate total_other_illnessessrate, stat(n mean sd cv q) col(stat)
+*** This code adds formatting
+esttab, cells("mean sd cv(fmt(%6.2fc)) count") nonumber nomtitle nonote noobs label collabels( "Mean" "SD" "CV" "N")
+** Now we must create the latex format for the table. 
+ esttab using "table1.tex", replace cells("mean sd cv(fmt(%6.2fc)) count") nonumber nomtitle nonote noobs label collabels( "Mean" "SD" "CV" "N")
+** Open the table in any application that Stata permits, we used Notepad and then put the code into Latex direclty. 
+
 
 ** Part 4 continued: This section of the code aims to find any possible correlations between the variables above. Simple correlation testing.
 
