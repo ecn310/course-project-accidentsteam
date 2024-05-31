@@ -209,6 +209,9 @@ We also included a box plot to show the different outliers within each decile an
 . codebook total_poisonings_rate
 . tab total_poisonings_rate
 . graph box inj_rate, over(decile) title("Injury Rate Distribution by Decile") b1title("Decile Groups For Annual Average Number of Employees") ytitle ("Injury Rate") 
+
+ graph export BoxInjury.png , replace
+ 
 . _pctile annual_average_employees, p(10(10)90)
 
 
